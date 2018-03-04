@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,11 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="ImageController.cs" />
+    <Compile Include="Infrastucture\Attributes\RouteAttribute.cs" />
+    <Compile Include="Infrastucture\Exceptions\ServiceException.cs" />
+    <Compile Include="Infrastucture\Exceptions\ValidationServiceException.cs" />
+    <Compile Include="Infrastucture\Helpers\ImageHelper.cs" />
+    <Compile Include="IRouteResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AsyncHttpServer.cs" />
+    <Compile Include="RouteResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

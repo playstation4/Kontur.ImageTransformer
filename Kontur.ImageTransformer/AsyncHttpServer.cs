@@ -8,8 +8,11 @@ namespace Kontur.ImageTransformer
 {
     internal class AsyncHttpServer : IDisposable
     {
-        public AsyncHttpServer()
+        private IRouteResolver _routeResolver;
+
+        public AsyncHttpServer(IRouteResolver routeResolver)
         {
+            _routeResolver = routeResolver;
             listener = new HttpListener();
         }
         
@@ -90,10 +93,17 @@ namespace Kontur.ImageTransformer
         private async Task HandleContextAsync(HttpListenerContext listenerContext)
         {
             // TODO: implement request handling
-
-            listenerContext.Response.StatusCode = (int)HttpStatusCode.OK;
-            using (var writer = new StreamWriter(listenerContext.Response.OutputStream))
-                writer.WriteLine("Hello, world!");
+            try
+            {
+                var result = _routeResolver.Resolve(listenerContext.Request);
+                listenerContext.Response.StatusCode = (int) HttpStatusCode.OK;
+                using (var writer = new BinaryWriter(listenerContext.Response.OutputStream))
+                    writer.Write(result);
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
 
         private readonly HttpListener listener;

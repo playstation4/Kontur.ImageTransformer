@@ -6,7 +6,7 @@ namespace Kontur.ImageTransformer
     {
         public static void Main(string[] args)
         {
-            using (var server = new AsyncHttpServer())
+            using (var server = new AsyncHttpServer(new RouteResolver()))
             {
                 server.Start("http://+:8080/");
 
